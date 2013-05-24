@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <something-else-entirely>
     <proxool>
-        <alias>cooking</alias>
-        <driver-url>jdbc:mysql://localhost:3306/test</driver-url>
+        <alias>edu</alias>
+        <driver-url>jdbc:mysql://localhost:3306/db_edu</driver-url>
         <driver-class>com.mysql.jdbc.Driver</driver-class>
         <driver-properties>
             <property name="user" value="root"/>
-            <property name="password" value="root"/>
+            <property name="password" value="longtc"/>
         </driver-properties>
         <maximum-connection-count>100</maximum-connection-count>
         <minimum-connection-count>10</minimum-connection-count>

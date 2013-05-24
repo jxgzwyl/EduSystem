@@ -21,7 +21,7 @@ public class DBase {
 
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection("proxool.cooking");
+            return DriverManager.getConnection("proxool.edu");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,6 +33,7 @@ public class DBase {
         if (con != null) {
             try {
                 con.close();
+                con = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -43,6 +44,7 @@ public class DBase {
         if (statement != null) {
             try {
                 statement.close();
+                statement = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -53,6 +55,7 @@ public class DBase {
         if (set != null) {
             try {
                 set.close();
+                set = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
