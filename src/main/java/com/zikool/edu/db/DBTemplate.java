@@ -16,6 +16,10 @@ import java.util.Map;
  */
 public class DBTemplate extends DBase {
 
+    public DBTemplate() {
+        super();
+    }
+
     public int add(String sql, Object...obj) {
         return curd(sql, obj);
     }

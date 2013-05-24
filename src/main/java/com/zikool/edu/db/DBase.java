@@ -11,6 +11,10 @@ import java.sql.*;
  */
 public class DBase {
 
+    public DBase() {
+        init();
+    }
+
     public void init() {
         try {
             Class.forName("org.logicalcobwebs.proxool.ProxoolDriver");
