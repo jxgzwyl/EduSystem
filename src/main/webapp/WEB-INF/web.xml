@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
     http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-    <filter>
+    <!--<filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.zikool.edu.filter.EncodingFilter</filter-class>
         <init-param>
@@ -23,7 +23,7 @@
             <param-value>WEB-INF/proxool.xml</param-value>
         </init-param>
         <load-on-startup>0</load-on-startup>
-    </servlet>
+    </servlet>-->
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

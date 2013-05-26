@@ -1,12 +1,12 @@
-﻿package com.zikool.edu.db;
-//test
+package com.zikool.edu.db;
+
 import java.sql.*;
 
 /**
  * Created with IntelliJ IDEA.
  * User: longyao
- * Date: 13-1-26
- * Time: 下午8:27
+ * Date: 13-5-26
+ * Time: 下午6:14
  * To change this template use File | Settings | File Templates.
  */
 public class DBase {
