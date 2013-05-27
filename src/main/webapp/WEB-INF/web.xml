@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
     http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
+    <!--字符集过滤器配置-->
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.zikool.edu.filter.EncodingFilter</filter-class>
@@ -13,6 +14,7 @@
         </init-param>
     </filter>
 
+    <!--数据库链接池初始化文件-->
     <servlet>
         <servlet-name>ServletConfigurator</servlet-name>
         <servlet-class>
@@ -24,6 +26,17 @@
         </init-param>
         <load-on-startup>0</load-on-startup>
     </servlet>
+
+    <servlet>
+        <servlet-name>DbTestServlet</servlet-name>
+         <servlet-class>
+             com.zikool.edu.test.DbTestServlet
+         </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DbTestServlet</servlet-name>
+        <url-pattern>/DbTest</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

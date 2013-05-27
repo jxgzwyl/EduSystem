@@ -34,7 +34,9 @@ public class DateUtil {
 	}
 
 	public static Date parseDate(String date, String pattern) {
+
 		if (date == null || date.length() == 0) return null;
+
 		SimpleDateFormat s = new SimpleDateFormat(pattern);
 		try {
 			return s.parse(date);
