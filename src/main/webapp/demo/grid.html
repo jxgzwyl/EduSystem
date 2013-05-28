@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Flexigrid</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="../css/flexiGrid/flexigrid.pack.css" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery/flexigrid.pack.js"></script>
+    </head>
+    <body>
+
+        <h2>Example </h2>
+        
+        <table class="flexme" style="display: none"></table>
+
+        <script type="text/javascript">
+
+            $(".flexme").flexigrid({
+                url : 'http://localhost:8080/EduSystem/DbTest',
+                dataType : 'json',
+                colModel : [ {
+                    display : 'EmployeeID',
+                    name : 'employeeID',
+                    width : 90,
+                    sortable : true,
+                    align : 'center'
+                    }, {
+                        display : 'Name',
+                        name : 'name',
+                        width : 120,
+                        sortable : true,
+                        align : 'left'
+                    }, {
+                        display : 'Primary Language',
+                        name : 'primary_language',
+                        width : 120,
+                        sortable : true,
+                        align : 'left'
+                    }, {
+                        display : 'Favorite Color',
+                        name : 'favorite_color',
+                        width : 80,
+                        sortable : true,
+                        align : 'left',
+                        hide : true
+                    }, {
+                        display : 'Favorite Animal',
+                        name : 'favorite_pet',
+                        width : 80,
+                        sortable : true,
+                        align : 'right'
+                } ],
+                buttons : [ {
+                    name : 'Add',
+                    bclass : 'add',
+                    onpress : Example4
+                    },{
+                        name : 'Edit',
+                        bclass : 'edit',
+                        onpress : Example4
+                    },{
+                        name : 'Delete',
+                        bclass : 'delete',
+                        onpress : Example4
+                    },{
+                        separator : true
+                    } 
+                ],
+                searchitems : [ {
+                    display : 'EmployeeID',
+                    name : 'employeeID'
+                    }, {
+                        display : 'Name',
+                        name : 'name',
+                        isdefault : true
+                } ],
+                sortname : "iso",
+                sortorder : "asc",
+                usepager : true,
+                title : 'Employees',
+                useRp : true,
+                rp : 15,
+                showTableToggleBtn : true,
+                width : 750,
+                height : 200
+            });
+
+            function Example4(com, grid) {
+                if (com == 'Delete') {
+                    var conf = confirm('Delete ' + $('.trSelected', grid).length + ' items?')
+
+                }
+                else if (com == 'Edit') {
+                    var conf = confirm('Edit ' + $('.trSelected', grid).length + ' items?')
+
+                }
+                else if (com == 'Add') {
+
+                }
+            }
+        </script>
+    </body>
+</html>
