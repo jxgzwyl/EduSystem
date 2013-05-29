@@ -9,13 +9,25 @@ import java.sql.*;
  * Time: 下午6:14
  * To change this template use File | Settings | File Templates.
  */
-public class DBase {
+public class DataSourceManager {
+    private static DataSourceManager mDataSourceManager;
+    private static Object mLockObject = new Object();
 
-    public DBase() {
-        init();
+    private DataSourceManager() {
     }
 
-    public void init() {
+    public static DataSourceManager getInstance() {
+        if (mDataSourceManager == null) {
+            synchronized (mLockObject) {
+                if (mDataSourceManager == null) {
+                    mDataSourceManager = new DataSourceManager();
+                }
+            }
+        }
+        return mDataSourceManager;
+    }
+
+    static {
         try {
             Class.forName("org.logicalcobwebs.proxool.ProxoolDriver");
         } catch (ClassNotFoundException e) {
@@ -63,6 +75,31 @@ public class DBase {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void release(Connection conn, Statement st, ResultSet rs) {
+
+        try {
+            if (rs != null)
+                rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            rs = null;
+        }
+        try {
+            if (st != null)
+                st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            st = null;
+        }
+        try {
+            if (conn != null)
+                conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn = null;
         }
     }
 }

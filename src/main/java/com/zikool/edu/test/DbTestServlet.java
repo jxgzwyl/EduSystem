@@ -1,8 +1,7 @@
 package com.zikool.edu.test;
 
 
-import com.zikool.edu.db.DBTemplate;
-import com.zikool.edu.db.RowMapper;
+import com.zikool.edu.db.DaoBase;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -33,7 +30,7 @@ public class DbTestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         PrintWriter w = resp.getWriter();
-        DBTemplate db = new DBTemplate();
+        DaoBase db = new DaoBase();
         
 //        String insert1 = "insert into user values(null, 'longyao', 'longyao'),(null, 'longtc', 'longtc'),(null, 'longtongcan', 'longtongcan')";
 //        String insert2 = "insert into user values(null, ?, ?)";

@@ -2,7 +2,7 @@
 <something-else-entirely>
     <proxool>
         <alias>edu</alias>
-        <driver-url>jdbc:mysql://192.168.9.52:3306/db_edu</driver-url>
+        <driver-url>jdbc:mysql://localhost:3306/db_edu</driver-url>
         <driver-class>com.mysql.jdbc.Driver</driver-class>
         <driver-properties>
             <property name="useUnicode" value="true"/>
