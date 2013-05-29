@@ -13,7 +13,28 @@
             <param-value>UTF-8</param-value>
         </init-param>
     </filter>
-
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- html标签转义过滤器-->
+    <filter>
+        <filter-name>HtmlFilter</filter-name>
+        <filter-class>com.zikool.edu.filter.HtmlFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HtmlFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 资源压缩过滤器-->
+    <filter>
+        <filter-name>GzipFilter</filter-name>
+        <filter-class>com.zikool.edu.filter.GzipFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <!--数据库链接池初始化文件-->
     <servlet>
         <servlet-name>ServletConfigurator</servlet-name>
@@ -29,9 +50,9 @@
 
     <servlet>
         <servlet-name>DbTestServlet</servlet-name>
-         <servlet-class>
-             com.zikool.edu.test.DbTestServlet
-         </servlet-class>
+        <servlet-class>
+            com.zikool.edu.test.DbTestServlet
+        </servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DbTestServlet</servlet-name>
