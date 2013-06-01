@@ -51,6 +51,7 @@ public class DataSourceManager {
                 con.close();
                 con = null;
             } catch (SQLException e) {
+                con = null;
                 e.printStackTrace();
             }
         }
@@ -62,6 +63,7 @@ public class DataSourceManager {
                 statement.close();
                 statement = null;
             } catch (SQLException e) {
+                statement = null;
                 e.printStackTrace();
             }
         }
@@ -73,33 +75,15 @@ public class DataSourceManager {
                 set.close();
                 set = null;
             } catch (SQLException e) {
+                set = null;
                 e.printStackTrace();
             }
         }
     }
 
     public void release(Connection conn, Statement st, ResultSet rs) {
-
-        try {
-            if (rs != null)
-                rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            rs = null;
-        }
-        try {
-            if (st != null)
-                st.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            st = null;
-        }
-        try {
-            if (conn != null)
-                conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            conn = null;
-        }
+        closeConnection(conn);
+        closeStatement(st);
+        closeResult(rs);
     }
 }
