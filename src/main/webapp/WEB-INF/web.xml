@@ -27,6 +27,7 @@
         <filter-name>HtmlFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
     <!-- 资源压缩过滤器-->
     <filter>
         <filter-name>GzipFilter</filter-name>
@@ -38,17 +39,17 @@
     </filter-mapping>
 
     <!--数据库链接池初始化文件-->
-    <!--<servlet>-->
-        <!--<servlet-name>ServletConfigurator</servlet-name>-->
-        <!--<servlet-class>-->
-            <!--org.logicalcobwebs.proxool.configuration.ServletConfigurator-->
-        <!--</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>xmlFile</param-name>-->
-            <!--<param-value>WEB-INF/proxool.xml</param-value>-->
-        <!--</init-param>-->
-        <!--<load-on-startup>0</load-on-startup>-->
-    <!--</servlet>-->
+    <servlet>
+        <servlet-name>ServletConfigurator</servlet-name>
+        <servlet-class>
+            org.logicalcobwebs.proxool.configuration.ServletConfigurator
+        </servlet-class>
+        <init-param>
+            <param-name>xmlFile</param-name>
+            <param-value>WEB-INF/proxool.xml</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
     <servlet>
         <servlet-name>DbTestServlet</servlet-name>
