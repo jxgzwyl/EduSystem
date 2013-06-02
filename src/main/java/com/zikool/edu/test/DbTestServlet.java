@@ -1,7 +1,7 @@
 package com.zikool.edu.test;
 
 
-import com.zikool.edu.db.DaoBase;
+import com.zikool.edu.db.JDBCDaoBase;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +30,7 @@ public class DbTestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         PrintWriter w = resp.getWriter();
-        DaoBase db = new DaoBase();
+        JDBCDaoBase db = new JDBCDaoBase();
         
 //        String insert1 = "insert into user values(null, 'longyao', 'longyao'),(null, 'longtc', 'longtc'),(null, 'longtongcan', 'longtongcan')";
 //        String insert2 = "insert into user values(null, ?, ?)";

@@ -49,11 +49,10 @@ public class DataSourceManager {
         if (con != null) {
             try {
                 con.close();
-                con = null;
             } catch (SQLException e) {
-                con = null;
                 e.printStackTrace();
             }
+            con = null;
         }
     }
 
@@ -61,11 +60,10 @@ public class DataSourceManager {
         if (statement != null) {
             try {
                 statement.close();
-                statement = null;
             } catch (SQLException e) {
-                statement = null;
                 e.printStackTrace();
             }
+            statement = null;
         }
     }
 
@@ -73,17 +71,16 @@ public class DataSourceManager {
         if (set != null) {
             try {
                 set.close();
-                set = null;
             } catch (SQLException e) {
-                set = null;
                 e.printStackTrace();
             }
+            set = null;
         }
     }
 
     public void release(Connection conn, Statement st, ResultSet rs) {
-        closeConnection(conn);
         closeStatement(st);
         closeResult(rs);
+        closeConnection(conn);
     }
 }
