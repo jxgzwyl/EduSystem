@@ -1,4 +1,4 @@
-package com.zikool.edu.amdin.service;
+package com.zikool.edu.admin.service;
 
 /**
  * Created with IntelliJ IDEA.

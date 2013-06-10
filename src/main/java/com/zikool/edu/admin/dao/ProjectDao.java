@@ -1,6 +1,6 @@
-package com.zikool.edu.amdin.dao;
+package com.zikool.edu.admin.dao;
 
-import com.zikool.edu.amdin.bean.ProjectBean;
+import com.zikool.edu.admin.bean.ProjectBean;
 
 import java.util.List;
 

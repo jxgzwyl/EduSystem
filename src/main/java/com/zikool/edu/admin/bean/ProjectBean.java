@@ -1,4 +1,4 @@
-package com.zikool.edu.amdin.bean;
+package com.zikool.edu.admin.bean;
 
 import java.util.Date;
 

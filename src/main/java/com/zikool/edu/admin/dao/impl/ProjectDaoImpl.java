@@ -1,7 +1,7 @@
-package com.zikool.edu.amdin.dao.impl;
+package com.zikool.edu.admin.dao.impl;
 
-import com.zikool.edu.amdin.bean.ProjectBean;
-import com.zikool.edu.amdin.dao.ProjectDao;
+import com.zikool.edu.admin.bean.ProjectBean;
+import com.zikool.edu.admin.dao.ProjectDao;
 import com.zikool.edu.db.DaoBase;
 import com.zikool.edu.db.JDBCDaoBase;
 

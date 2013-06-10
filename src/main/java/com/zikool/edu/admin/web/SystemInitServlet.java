@@ -1,6 +1,4 @@
-package com.zikool.edu.amdin.sevlet;
-
-import com.zikool.edu.config.Config;
+package com.zikool.edu.admin.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,33 +8,35 @@ import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
- * User: longyao
- * Date: 13-6-2
- * Time: 下午5:07
+ * User: Administrator
+ * Date: 13-6-10
+ * Time: 下午5:11
  * To change this template use File | Settings | File Templates.
  */
-public class ProjectServlet extends HttpServlet {
-
+public class SystemInitServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-        doPost(req, resp);
+        doPost(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        super.doPost(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+        initSystemPrivilege();
+        initSystemRole();
+        initAdmin();
+    }
 
-        int op = Integer.parseInt(req.getParameter("op"));
 
-        switch (op) {
-            case Config.ADD :
-                break;
-            case Config.EDIT :
-                break;
-            case Config.DELETE :
-                break;
-        }
+
+
+    private void initSystemPrivilege() {
 
     }
+    private void initSystemRole() {
+    }
+
+    private void initAdmin() {
+    }
 }
+

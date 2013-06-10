@@ -1,5 +1,7 @@
 package com.zikool.edu.test;
 
+import java.util.UUID;
+
 /**
  * Created with IntelliJ IDEA.
  * User: longyao
@@ -10,6 +12,6 @@ package com.zikool.edu.test;
 public class Test1 {
 
     public static void main(String[] s) {
-
+                System.out.println(UUID.randomUUID());
     }
 }
