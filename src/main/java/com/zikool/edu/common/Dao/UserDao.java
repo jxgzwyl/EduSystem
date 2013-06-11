@@ -9,6 +9,6 @@ package com.zikool.edu.common.Dao;
  */
 import com.zikool.edu.common.bean.User;
 public interface  UserDao{
-            User findUserById(int id);
+            User findUserById(String id);
             User findUser(String identityCard,String password);
      }
