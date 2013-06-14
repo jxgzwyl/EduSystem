@@ -1,5 +1,12 @@
 package com.zikool.edu.db;
 
+import com.zikool.edu.utils.GenericsUtils;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,25 +21,35 @@ import java.util.Map;
  * Time: 下午8:42
  * To change this template use File | Settings | File Templates.
  */
-public class JDBCDaoBase implements DaoBase{
+@Repository("JDBCDaoBase")
+public class JDBCDaoBase<T> implements DaoBase<T> {
+    protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
+    @Resource(name = "jdbcTemplate")
+    protected JdbcTemplate jdbcTemplate;
 
     @Override
-    public int add(String sql, Object... obj) {
-        return curd(sql, obj);
+    public int add(String sql, Object... obj) throws DataAccessException {
+        return jdbcTemplate.update(sql, obj);
     }
 
     @Override
-    public int delete(String sql, Object... obj) {
-        return curd(sql, obj);
+    public int delete(String sql, Object... obj)throws DataAccessException {
+        return jdbcTemplate.update(sql, obj);
     }
 
     @Override
-    public int update(String sql, Object... obj) {
-        return curd(sql, obj);
+    public int update(String sql, Object... obj)throws DataAccessException {
+        return jdbcTemplate.update(sql, obj);
+    }
+     public T  queryForObject(String sql,Object ...obj){
+         return jdbcTemplate.queryForObject(sql,entityClass,obj);
+     }
+    public List<T> query(String sql, BeanPropertyRowMapper<T> rowMapper, Object... obj) throws DataAccessException{
+        return jdbcTemplate.query(sql, obj, rowMapper);
     }
 
     @Override
-    public List<Map<String, Object>> queryObjectList(String sql, Object... obj) {
+    public List<Map<String, Object>> queryObjectList(String sql, Object... obj)throws DataAccessException {
 
         Connection conn = DataSourceManager.getInstance().getConnection();
         PreparedStatement statement = null;
@@ -64,7 +81,7 @@ public class JDBCDaoBase implements DaoBase{
     }
 
     @Override
-    public <T extends Object> List<T> queryEntityList(String sql, Class<T> cls, Object...obj) {
+    public <T extends Object> List<T> queryEntityList(String sql, Class<T> cls, Object... obj) throws DataAccessException{
 
         Connection con = DataSourceManager.getInstance().getConnection();
         PreparedStatement statement = null;
@@ -80,10 +97,10 @@ public class JDBCDaoBase implements DaoBase{
 
             Object entity = null;
             Field[] fields = cls.getDeclaredFields();
-            while(set.next()) {
+            while (set.next()) {
                 entity = cls.newInstance();
                 setFields(entity, fields, names, set);
-                results.add((T)entity);
+                results.add((T) entity);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -133,7 +150,6 @@ public class JDBCDaoBase implements DaoBase{
     }
 
     private int curd(String sql, Object... obj) {
-
         int count = -1;
         Connection conn = DataSourceManager.getInstance().getConnection();
         PreparedStatement pst = null;

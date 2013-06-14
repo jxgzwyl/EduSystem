@@ -30,17 +30,21 @@
 
 
     <!--数据库链接池初始化文件-->
-    <servlet>
-        <servlet-name>ServletConfigurator</servlet-name>
-        <servlet-class>
-            org.logicalcobwebs.proxool.configuration.ServletConfigurator
-        </servlet-class>
-        <init-param>
-            <param-name>xmlFile</param-name>
-            <param-value>WEB-INF/proxool.xml</param-value>
-        </init-param>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
+    <!-- 对PROXOOL进行配置 -->
+    <!-- 线程池监听启动参数 -->
+    <context-param>
+        <param-name>autoShutdown</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>xmlFile</param-name>
+        <param-value>WEB-INF/proxool.xml</param-value>
+    </context-param>
+    <!-- 线程池监听 -->
+    <listener>
+        <listener-class>com.zikool.edu.listener.ProxoolInitListener</listener-class>
+    </listener>
+    <!-- 监控数据库连接池的连接情况 -->
     <servlet>
         <servlet-name>Admin</servlet-name>
         <servlet-class>
@@ -70,12 +74,13 @@
         <role-name>manager</role-name>
     </security-role>
 
+
+    <!-- 对Spring容器进行实例化 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:bean.xml</param-value>
     </context-param>
-    <!-- 对Spring容器进行实例化 -->
-    <listener>
+   <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <servlet>
@@ -92,4 +97,8 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <!--Sesson有效时间-->
+    <session-config>
+        <session-timeout>45</session-timeout>
+    </session-config>
 </web-app>

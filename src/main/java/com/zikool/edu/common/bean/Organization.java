@@ -20,15 +20,19 @@ package com.zikool.edu.common.bean;
         CONSTRAINT `tb_organization_ibfk_1` FOREIGN KEY (`regional_administrator_id`) REFERENCES `tb_user` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 public class Organization {
-      private int ID;
-      private String name;
-      //单位机构的市级编码
-      private String cityCode;
-     //单位机构的区县编码
-      private String countyCode;
-      private String contactInfo;
-      private String address;
-      private User areaAdmin;
+    public int getID() {
+        return ID;
+    }
+
+    private int ID;
+    private String name;
+    //单位机构的市级编码
+    private String cityCode;
+    //单位机构的区县编码
+    private String countyCode;
+    private String contactInfo;
+    private String address;
+    private User areaAdmin;
 
     public Organization(String name, String cityCode, String countyCode, String contactInfo, String address) {
         this.name = name;
@@ -39,7 +43,7 @@ public class Organization {
     }
 
     public Organization(String name, String cityCode, String countyCode, String contactInfo, String address, User areaAdmin) {
-        this(name,cityCode,countyCode,contactInfo,address);
+        this(name, cityCode, countyCode, contactInfo, address);
         this.areaAdmin = areaAdmin;
     }
 

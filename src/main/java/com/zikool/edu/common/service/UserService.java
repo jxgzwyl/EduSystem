@@ -14,6 +14,9 @@ public interface UserService {
     User getUserById(int Id);
     User getUserByIdentityCard(String identityCard);
     User getUserByIdentityCardAndPassword(String identityCard,String password);
-    int  save(User user);
-    int  update(User user);
+    int  save(User user) throws IllegalAccessException;
+    int  update(User user) throws IllegalAccessException;
+    int delete(int Id);
+
+
 }
