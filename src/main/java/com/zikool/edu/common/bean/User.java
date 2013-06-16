@@ -44,7 +44,7 @@ public class User {
     private String loginName;
     private String password;
     private String roleName;
-    private char gender = '男';
+    private String gender;
     private String organizationName;
     private String grade;
     private String professional;
@@ -72,7 +72,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String name, String identityCard, Role role, User areaAdmin, Organization organization, String address, String professional, String grade, String password, char gender, String phoneNum, String teachSubject) {
+    public User(String name, String identityCard, Role role, User areaAdmin, Organization organization, String address, String professional, String grade, String password, String gender, String phoneNum, String teachSubject) {
         this.name = name;
         this.identityCard = identityCard;
         this.role = role;
@@ -131,11 +131,11 @@ public class User {
         this.roleName = roleName;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -233,5 +233,54 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (identityCard != null ? !identityCard.equals(user.identityCard) : user.identityCard != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", identityCard='" + identityCard + '\'' +
+                ", loginName='" + loginName + '\'' +
+                ", password='" + password + '\'' +
+                ", roleName='" + roleName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", organizationName='" + organizationName + '\'' +
+                ", grade='" + grade + '\'' +
+                ", professional='" + professional + '\'' +
+                ", teachSubject='" + teachSubject + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", email='" + email + '\'' +
+                ", qq='" + qq + '\'' +
+                ", blog='" + blog + '\'' +
+                ", address='" + address + '\'' +
+                ", organization=" + organization +
+                ", areaAdmin=" + areaAdmin +
+                ", role=" + role +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (identityCard != null ? identityCard.hashCode() : 0);
+        return result;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

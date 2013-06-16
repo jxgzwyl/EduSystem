@@ -3,8 +3,9 @@ package com.zikool.edu.test;
 
 import com.zikool.edu.common.service.UserService;
 import com.zikool.edu.db.JDBCDaoBase;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,15 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class DbTestServlet extends HttpServlet {
-    @Resource(name = "userService")
     private UserService userService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();    //To change body of overridden methods use File | Settings | File Templates.
+        WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(
+                getServletContext());
+         userService = (UserService) ctx.getBean("userService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +39,7 @@ public class DbTestServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(
-//                getServletContext());
-//        UserService userService = (UserService) ctx.getBean("userService");
+
         PrintWriter w = resp.getWriter();
         JDBCDaoBase db = new JDBCDaoBase();
         com.zikool.edu.common.bean.User user = new com.zikool.edu.common.bean.User();
@@ -41,7 +47,7 @@ public class DbTestServlet extends HttpServlet {
         user.setPassword("666666");
         user.setIdentityCard("360423198710342345");
         user.setRoleName("学员");
-        user.setGender('男');
+        user.setGender("男");
         user.setOrganizationName("武当");
         user.setAddress("武当山");
         try {
@@ -79,11 +85,12 @@ public class DbTestServlet extends HttpServlet {
         w.close();
     }
 
-    private void print(List<User> list, PrintWriter w) {
-        for (User u : list) {
+    private void print(List<User1> list, PrintWriter w) {
+        for (User1 u : list) {
             System.out.println("id = " + u.getId() + ",name = " + u.getName() + ",pwd = " + u.getPassword());
             w.print("id = " + u.getId() + ",name = " + u.getName() + ",pwd = " + u.getPassword());
             w.println();
         }
     }
+
 }

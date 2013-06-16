@@ -4,10 +4,13 @@ import com.zikool.edu.common.bean.User;
 import com.zikool.edu.common.service.UserService;
 import com.zikool.edu.config.Config;
 import com.zikool.edu.db.JDBCDaoBase;
+import com.zikool.edu.test.UserRowMap;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 
 /**
@@ -30,7 +33,7 @@ public class UserServiceImpl extends JDBCDaoBase<User> implements UserService {
         String passwordMD5Digest = DigestUtils.md5DigestAsHex(password.getBytes());
         StringBuilder sb = new StringBuilder();
         //SELECT * FROM `tb_user` WHERE user_login_name="jxgzwyl" and `password`="1234";
-        sb.append("SELECT * FROM")
+        sb.append("SELECT * FROM ")
                 .append(Config.TB_NAME_USER)
                 .append("WHERE user_longin_name=?")
                 .append("AND password=?");
@@ -42,31 +45,36 @@ public class UserServiceImpl extends JDBCDaoBase<User> implements UserService {
     public User getUserById(int Id) {
         //SELECT * FROM `tb_user` WHERE user_id =1;
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM")
+        sb.append("SELECT * FROM ")
                 .append(Config.TB_NAME_USER)
                 .append("WHERE user_id=?");
-        return super.queryForObject(sb.toString(), Id);
+        return super.queryForObject(sb.toString(),new UserRowMap(), Id);
     }
 
     @Override
     public User getUserByIdentityCard(String identityCard) {
         //     SELECT * FROM `tb_user` WHERE user_identity_card =36042419********;
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM")
+        sb.append("SELECT * FROM ")
                 .append(Config.TB_NAME_USER)
                 .append("WHERE user_identity_card=?");
-        return super.queryForObject(sb.toString(), identityCard);
+        return super.queryForObject(sb.toString(), new UserRowMap(),identityCard);
     }
 
     @Override
     public User getUserByIdentityCardAndPassword(String identityCard, String password) {
         //SELECT * FROM `tb_user` WHERE user_identity_card =360424198610**** AND `password`=1234;
+        if (StringUtils.isEmpty(password) == true) {
+            password = "";
+        }
+
+        String passwordMD5Digest = DigestUtils.md5DigestAsHex(password.getBytes());
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM")
+        sb.append("SELECT * FROM ")
                 .append(Config.TB_NAME_USER)
-                .append("WHERE user_identity_card=?")
-                .append("AND password=?");
-        return super.queryForObject(sb.toString(), identityCard, password);
+                .append(" WHERE user_identity_card = ? ")
+                .append(" AND password=?");
+        return super.queryForObject(sb.toString(),new UserRowMap(), identityCard, passwordMD5Digest);
     }
 
     @Override
@@ -92,6 +100,7 @@ public class UserServiceImpl extends JDBCDaoBase<User> implements UserService {
         System.out.println("sb-------->"+sb);
         System.out.println("user-------->"+user);
         System.out.println("jdbcTemplate-------->"+jdbcTemplate);
+        System.out.println("user-------->"+user.getGender());
         return super.add(sb.toString(), user.getName(), user.getIdentityCard(), user.getLoginName(),"teacher", user.getGender()
                 , user.getOrganization(), user.getGrade(), user.getProfessional(), user.getTeachSubject(), user.getPhoneNum(),
                 user.getEmail(), user.getQq(), user.getBlog(), user.getAddress(), user.getPassword(),null, null,
@@ -126,4 +135,12 @@ public class UserServiceImpl extends JDBCDaoBase<User> implements UserService {
                 .append("WHERE user_id=?");
         return super.delete(sb.toString(), Id);  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    public List<User> getAllUser(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM ")
+          .append(Config.TB_NAME_USER);
+        return super.queryObjectList(sb.toString(),new UserRowMap(),null);
+    }
+
 }

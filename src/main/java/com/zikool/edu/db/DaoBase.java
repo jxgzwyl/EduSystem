@@ -1,9 +1,9 @@
 package com.zikool.edu.db;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,9 +20,11 @@ public interface DaoBase<T> {
 
     public int update(String sql, Object... obj) throws DataAccessException;
 
-    public List<Map<String, Object>> queryObjectList(String sql, Object... obj) throws DataAccessException;
+    public T queryForObject(String sql, RowMapper<T> rm, Object... obj) throws DataAccessException;
 
-    public <T extends Object> List<T> queryEntityList(String sql, Class<T> cls, Object... obj) throws DataAccessException;
+    public List<T> queryObjectList(String sql, RowMapper<T> rm, Object... obj) throws DataAccessException;
 
-    public <T extends Object> List<T> queryList(String sql, RowMapper<T> rowMapper, Object... obj) throws DataAccessException;
+//    public <T extends Object> List<T> queryEntityList(String sql, Class<T> cls, Object... obj) throws DataAccessException;
+//
+//    public <T extends Object> List<T> queryList(String sql, RowMapper<T> rowMapper, Object... obj) throws DataAccessException;
 }

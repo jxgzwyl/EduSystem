@@ -7,7 +7,7 @@ package com.zikool.edu.test;
  * Time: 上午10:50
  * To change this template use File | Settings | File Templates.
  */
-public class User {
+public class User1 {
     private int id;
     private String name;
     private String password;

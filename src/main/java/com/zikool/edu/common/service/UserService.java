@@ -2,6 +2,8 @@ package com.zikool.edu.common.service;
 
 import com.zikool.edu.common.bean.User;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -14,6 +16,7 @@ public interface UserService {
     User getUserById(int Id);
     User getUserByIdentityCard(String identityCard);
     User getUserByIdentityCardAndPassword(String identityCard,String password);
+    List<User> getAllUser();
     int  save(User user) throws IllegalAccessException;
     int  update(User user) throws IllegalAccessException;
     int delete(int Id);
