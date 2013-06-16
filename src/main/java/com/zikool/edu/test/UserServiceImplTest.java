@@ -29,6 +29,7 @@ public class UserServiceImplTest {
         user.setAddress("武当山");
         UserService userService  = (UserService) applicationContext.getBean("userService");
         try {
+            System.out.println("userService------------------------>"+userService);
             userService.save(user)     ;
         } catch (IllegalAccessException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

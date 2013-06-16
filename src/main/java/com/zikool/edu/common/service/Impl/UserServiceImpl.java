@@ -5,6 +5,7 @@ import com.zikool.edu.common.service.UserService;
 import com.zikool.edu.config.Config;
 import com.zikool.edu.db.JDBCDaoBase;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
@@ -17,6 +18,7 @@ import org.springframework.util.StringUtils;
  * To change this template use File | Settings | File Templates.
  */
 @Service("userService")
+@Transactional
 public class UserServiceImpl extends JDBCDaoBase<User> implements UserService {
 
     @Override
@@ -81,16 +83,19 @@ public class UserServiceImpl extends JDBCDaoBase<User> implements UserService {
 //                "jxtest","男","江西修水二中");
         StringBuilder sb = new StringBuilder();
 
-        sb.append("INSERT INTO")
+        sb.append("INSERT INTO ")
                 .append(Config.TB_NAME_USER)
-                .append("(user_name,user_identity_card,user_login_name,role_name,user_gender,")
+                .append( "(user_name,user_identity_card,user_login_name,role_name,user_gender,")
                 .append("user_organization, user_grade, user_professional, teach_subject, phone, email,qq")
                 .append(",blog, address, password, organization_id, administrator_id,role_id)")
                 .append("values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        return super.add(sb.toString(), user.getName(), user.getIdentityCard(), user.getLoginName(), user.getRole().getName(), user.getGender()
+        System.out.println("sb-------->"+sb);
+        System.out.println("user-------->"+user);
+        System.out.println("jdbcTemplate-------->"+jdbcTemplate);
+        return super.add(sb.toString(), user.getName(), user.getIdentityCard(), user.getLoginName(),"teacher", user.getGender()
                 , user.getOrganization(), user.getGrade(), user.getProfessional(), user.getTeachSubject(), user.getPhoneNum(),
-                user.getEmail(), user.getQq(), user.getBlog(), user.getAddress(), user.getPassword(), user.getOrganization().getID(), user.getAreaAdmin().getId(),
-                user.getRole().getID());
+                user.getEmail(), user.getQq(), user.getBlog(), user.getAddress(), user.getPassword(),null, null,
+                null);
     }
 
     @Override

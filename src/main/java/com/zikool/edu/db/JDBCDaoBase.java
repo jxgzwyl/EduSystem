@@ -5,6 +5,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
@@ -21,14 +22,16 @@ import java.util.Map;
  * Time: 下午8:42
  * To change this template use File | Settings | File Templates.
  */
-@Repository("JDBCDaoBase")
+@Repository
+@Transactional
 public class JDBCDaoBase<T> implements DaoBase<T> {
     protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
-    @Resource(name = "jdbcTemplate")
+    @Resource
     protected JdbcTemplate jdbcTemplate;
 
     @Override
     public int add(String sql, Object... obj) throws DataAccessException {
+        System.out.println("jdbcTemplate-------------->"+jdbcTemplate);
         return jdbcTemplate.update(sql, obj);
     }
 

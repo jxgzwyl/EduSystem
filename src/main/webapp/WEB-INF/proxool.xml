@@ -13,7 +13,7 @@
         <maximum-connection-count>150</maximum-connection-count>
         <minimum-connection-count>10</minimum-connection-count>
         <house-keeping-sleep-time>90000</house-keeping-sleep-time>
-        <maximum-new-connections>10</maximum-new-connections>
+        <simultaneous-build-throttle>10</simultaneous-build-throttle>
         <prototype-count>5</prototype-count>
         <test-before-use>true</test-before-use>
         <house-keeping-test-sql>select 1 from dual</house-keeping-test-sql>
