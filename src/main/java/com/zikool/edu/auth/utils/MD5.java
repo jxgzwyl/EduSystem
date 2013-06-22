@@ -1,4 +1,4 @@
-package com.zikool.edu.utils;
+package com.zikool.edu.auth.utils;
 
 import java.security.MessageDigest;
 

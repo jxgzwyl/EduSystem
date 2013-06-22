@@ -1,104 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-    http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <!--字符集过滤器配置-->
+ 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/root-context.xml</param-value>
+	</context-param>
+	
+	    <!--字符集过滤器配置-->
     <filter>
-        <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.zikool.edu.filter.EncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>EncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
-    <!-- html标签转义过滤器-->
-    <filter>
-        <filter-name>HtmlFilter</filter-name>
-        <filter-class>com.zikool.edu.filter.HtmlFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>HtmlFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-
-    <!--数据库链接池初始化文件-->
-    <!-- 对PROXOOL进行配置 -->
-    <!-- 线程池监听启动参数 -->
-    <context-param>
-        <param-name>autoShutdown</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <param-name>xmlFile</param-name>
-        <param-value>WEB-INF/proxool.xml</param-value>
-    </context-param>
-    <!-- 线程池监听 -->
-    <listener>
-        <listener-class>com.zikool.edu.listener.ProxoolInitListener</listener-class>
-    </listener>
-    <!-- 监控数据库连接池的连接情况 -->
-    <servlet>
-        <servlet-name>Admin</servlet-name>
-        <servlet-class>
-            org.logicalcobwebs.proxool.admin.servlet.AdminServlet
-        </servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Admin</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-    <!-- 配置受保护域，只有Tomcat管理员才能察看连接池的信息 -->
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>proxool</web-resource-name>
-            <url-pattern>/admin</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>manager</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <login-config>
-        <auth-method>BASIC</auth-method>
-        <realm-name>proxool manager Application</realm-name>
-    </login-config>
-    <security-role>
-        <description>The role that is required to log in to the Manager Application</description>
-        <role-name>manager</role-name>
-    </security-role>
-
-
-    <!-- 对Spring容器进行实例化 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:bean.xml</param-value>
-    </context-param>
-   <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <servlet>
-        <servlet-name>DbTestServlet</servlet-name>
-        <servlet-class>
-            com.zikool.edu.test.DbTestServlet
-        </servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DbTestServlet</servlet-name>
-        <url-pattern>/DbTest</url-pattern>
-    </servlet-mapping>
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <!--Sesson有效时间-->
-    <session-config>
-        <session-timeout>45</session-timeout>
-    </session-config>
+    
+    
+    <jsp-config>
+		<taglib>
+			<taglib-uri>/auth</taglib-uri>
+			<taglib-location>/WEB-INF/auth.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>

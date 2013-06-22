@@ -11,18 +11,20 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -66,6 +68,44 @@
             <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.0.0-RC3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
+		
+        <dependency>
             <groupId>org.gaixie.extjs-wrapped</groupId>
             <artifactId>extjs-wrapped</artifactId>
             <version>4.1.0</version>
@@ -77,15 +117,41 @@
             <version>0.1.0</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.directory.studio</groupId>
             <artifactId>org.apache.commons.logging</artifactId>
             <version>1.1.1</version>
         </dependency>
+        
+        
+        <dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>1.6.12</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<!-- json -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-lgpl</artifactId>
+			<version>1.9.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>1.9.2</version>
+			<scope>compile</scope>
+		</dependency>
+        
     </dependencies>
 
     <build>
@@ -99,11 +165,39 @@
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                             <port>8080</port>
                         </connector>
-                     </connectors>
+                    </connectors>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                 </configuration>
             </plugin>
         </plugins>
         <finalName>EduSystem</finalName>
     </build>
+
+<!--
+
+ <build>
+                <finalName>EduSystem</finalName>&lt;!&ndash;生成的目标文件名 &ndash;&gt;
+                <plugins>&lt;!&ndash; tomcat 的插件 &ndash;&gt;
+                 		<plugin>
+							<artifactId>maven-compiler-plugin</artifactId>
+							<configuration>
+								<source>1.5</source>
+								<target>1.5</target>
+							</configuration>
+						</plugin>
+                        <plugin>
+                                <groupId>org.codehaus.mojo</groupId>
+                                <artifactId>tomcat-maven-plugin</artifactId>
+                                <configuration>
+                                        <url>http://localhost:8080/manager</url>
+                                        <server>tomcat</server>
+                                        <username>admin</username>
+										<password>password</password>
+                                        <path>/EduSystem</path>
+                                </configuration>
+                        </plugin>
+                </plugins>
+</build>
+-->
+
 </project>
