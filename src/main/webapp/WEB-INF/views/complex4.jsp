@@ -79,7 +79,7 @@ p {
 									    items: [{
 									        xtype: 'textfield',
 									        fieldLabel: 'topic',
-									        name: 'title',
+									        name: 'title'
 									    }],
 									    buttons: [{
 									        text: '修改',
