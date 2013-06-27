@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+ 	<!-- 引用ehCache的配置 -->  
+    <bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+      	<property name="configLocation">  
+       		<value>classpath:config/ehcache.xml</value>  
+      	</property>  
+    </bean>  
+      
+    <!-- 定义ehCache的工厂，并设置所使用的Cache name -->  
+    <bean id="systemEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">  
+      	<property name="cacheManager">  
+        	<ref local="defaultCacheManager"/>  
+		</property>
+		<property name="cacheName" value="_SYSTEM_CACHE_" />
+    </bean>
+    
+    <!-- 定义ehCache的工厂，并设置所使用的Cache name -->  
+    <bean id="rolesEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">  
+      	<property name="cacheManager">  
+        	<ref local="defaultCacheManager"/>  
+		</property>
+		<property name="cacheName" value="_ROLE_CACHE_" />
+    </bean>
+    
+    <!-- 定义ehCache的工厂，并设置所使用的Cache name -->  
+    <bean id="resourcesEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">  
+      	<property name="cacheManager">  
+        	<ref local="defaultCacheManager"/>  
+		</property>
+		<property name="cacheName" value="_RESOURCE_CACHE_" />
+    </bean>
+    
+</beans>

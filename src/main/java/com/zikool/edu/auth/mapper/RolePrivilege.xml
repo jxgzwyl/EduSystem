@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="RolePrivilegeMapper">
+
+	<resultMap type="com.zikool.edu.auth.entity.RolePrivilege" id="rolePrivilegeMap">
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="role_id" jdbcType="INTEGER" property="roleId"/>
+		<result column="privilege_id" jdbcType="INTEGER" property="privilegeId"/>
+		<result column="operation" jdbcType="VARCHAR" property="operation"/>
+	</resultMap>
+
+	<select id="findOperationByIdUser" parameterType="hashmap" resultMap="rolePrivilegeMap">
+		select distinct rp.* from tb_user u join tb_role_privilege rp on u.role_id = rp.role_id
+		where u.user_id = #{userId,jdbcType=INTEGER}
+	</select>
+
+</mapper>

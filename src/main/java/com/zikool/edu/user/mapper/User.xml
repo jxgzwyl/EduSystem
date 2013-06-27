@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserMapper">
+	
+	<resultMap type="com.zikool.edu.user.entity.User" id="userMap">
+		<id column="user_id" jdbcType="INTEGER" property="userId"/>
+		<result column="user_name" jdbcType="VARCHAR" property="userName"/>
+		<result column="user_identity_card" jdbcType="VARCHAR" property="userIdentityCard"/>
+		<result column="user_login_name" jdbcType="VARCHAR" property="userLoginName"/>
+		<result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+		<result column="user_gender" jdbcType="VARCHAR" property="userGender"/>
+		<result column="user_organization" jdbcType="VARCHAR" property="userOrganization"/>
+		<result column="user_grade" jdbcType="VARCHAR" property="userGrade"/>
+		<result column="user_professional" jdbcType="VARCHAR" property="userProfessional"/>
+		<result column="teach_subject" jdbcType="VARCHAR" property="teachSubject"/>
+		<result column="phone" jdbcType="VARCHAR" property="phone"/>
+		<result column="email" jdbcType="VARCHAR" property="email"/>
+		<result column="qq" jdbcType="VARCHAR" property="qq"/>
+		<result column="blog" jdbcType="VARCHAR" property="blog"/>
+		<result column="address" jdbcType="VARCHAR" property="address"/>
+		<result column="password" jdbcType="VARCHAR" property="password"/>
+		<result column="organization_id" jdbcType="INTEGER" property="organizationId"/>
+		<result column="administrator_id" jdbcType="INTEGER" property="administratorId"/>
+		<result column="role_id" jdbcType="INTEGER" property="roleId"/>
+		<result column="is_delete" jdbcType="SMALLINT" property="delete"/>
+	</resultMap>
+
+	
+	<select id="findUserOne" parameterType="hashmap" resultMap="userMap">
+		select * from tb_user t
+		<where>
+			<if test="userId != null">and t.user_id = #{userId, jdbcType=INTEGER} </if>
+			<if test="userIdentityCard != null and userIdentityCard != ''">and t.user_identity_card = #{userIdentityCard, jdbcType=VARCHAR}</if>
+			<if test="delete != null">and t.is_delete =  #{delete, jdbcType=SMALLINT}</if>
+		</where>
+		
+	</select>
+
+</mapper>
