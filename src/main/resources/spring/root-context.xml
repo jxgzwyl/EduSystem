@@ -10,16 +10,20 @@
 		<property name="locations">
 			<list>
 				<value>classpath:config/application.properties</value>
+				<value>classpath:config/jdbc.properties</value>
 			</list>
 		</property>
 	</bean>
 
 	<context:annotation-config />
-	
-	<context:component-scan base-package="com.zikool.edu">
+	<context:component-scan base-package="com.zikool.edu" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
 	<import resource="classpath:spring/jdbc-context.xml"/>
-	<import resource="classpath:spring/common/auth.xml"/>
+	<import resource="classpath:spring/shiro-context.xml"/>
+	<import resource="classpath:spring/ehcache-context.xml"/>
 </beans>

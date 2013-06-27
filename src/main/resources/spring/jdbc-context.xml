@@ -11,20 +11,27 @@
 
     <!-- 配置 proxool 数据源 -->
 	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
-		<property name="driver">
-			<value>com.mysql.jdbc.Driver</value>
-		</property>
+		<property name="alias" value="${jdbc.alias}"/>
+		<property name="driver" value="${jdbc.driver}" />
 		<property name="driverUrl">
-			<value>jdbc:mysql://localhost:3306/db_edu</value>
+			<value>${jdbc.driverUrl}</value>
 		</property>
-		<property name="user" value="root" />
-		<property name="password" value="zhangjiaolong" />
-		<property name="alias" value="edu" />
-		<property name="maximumConnectionCount" value="100"></property>
-		<property name="minimumConnectionCount" value="10"></property>
-		<property name="testBeforeUse" value="true"></property>
-		<property name="prototypeCount" value="5"></property> 
-		<property name="houseKeepingTestSql" value="select CURRENT_DATE" />
+		<property name="user" value="${jdbc.user}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="testBeforeUse" value="true"/>
+		<property name="testAfterUse" value="true"/>
+		<!-- 是指在任一时刻，可以（同时）建立的最大连接数，也就是说，就是已经请求的、但还没可用的新连接数量 -->
+		<property name="simultaneousBuildThrottle" value="${jdbc.simultaneousBuildThrottle}"/>
+		<!--最大连接数(默认5个),超过了这个连接数,再有请求时,就排在队列中等候,最大的等待请求数由maximum-new-connections决定 -->
+		<property name="maximumConnectionCount" value="${jdbc.maximumConnectionCount}"/>
+		<!--最小连接数(默认2个) -->
+		<property name="minimumConnectionCount" value="${jdbc.minimumConnectionCount}"/>
+		<!--最少保持的空闲连接数(默认2个) -->
+		<property name="prototypeCount" value="${jdbc.prototypeCount}"/>
+		<!--用于保持连接的测试语句 -->
+		<property name="houseKeepingTestSql">
+			<value>${jdbc.houseKeepingTestSql}</value>
+		</property>
 	</bean>
     
     <!--定义factory -->
@@ -33,13 +40,15 @@
 		<property name="configLocation" value="classpath:spring/mybatis-config.xml" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:mapper/*.xml</value>
+				<value>classpath:com/zikool/edu/*/mapper/*.xml</value>
 			</list>
 		</property>
 	</bean>
+	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">  
         <constructor-arg ref="sqlSessionFactory" />  
     </bean>
+    
     <tx:annotation-driven transaction-manager="transactionManager" />    	
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
