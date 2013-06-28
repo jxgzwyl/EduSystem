@@ -1,65 +1,85 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>登录页面</title>
-<script type="text/javascript" src="${path}/resources/extjs/jquery/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="${path}/resources/extjs/jquery/jquery.form.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$("#identityCard").focus();
-		
-		$("#loginform").submit(function(){
-			var options = {
-				type:'post',
-				dataType:'json',
-				beforeSubmit:showRequest,
-				success:showResponse,
-				error:function(){
-					alert('请求服务器失败,请检查网络!');
-				}
-			};
-				
-			$(this).ajaxSubmit(options);
-			return false; 
-		});
-	});
-	
-	function showRequest(formData, jqForm, options) { 
-		var form = jqForm[0];
-		if (!form.identityCard.value) { 
-			$('#errorMsg').html('请输入用户名!'); 
-	        return false; 
-	    }
-		if(!form.password.value){
-			$('#errorMsg').html('请输入密码!');
-			return false; 
-		}
-		$('#errorMsg').html('请求中,请稍等....');
-		return true;
-	}
-	
-	function showResponse(responseText, statusText, xhr, $form)  { 
-		var json = eval(responseText);
-		if(!json.success){
-			$('#errorMsg').html(json.msg);
-			return;
-		}
-		$('#errorMsg').html('登录成功,页面跳转中.');
-		location.href='${path}/home.do';
-	}
-</script>
+<title></title>
+<script src="${path}/resources/extjs/ext-all.js" type="text/javascript"></script>
+<link href="${path}/resources/extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+   
 </head>
+<script type="text/javascript">
+    Ext.onReady(function () {
+        
+    	
+    
+        var states = [
+						    {"value":"0","name":"学员"},
+						    {"value":"1","name":"辅导老师"},
+						    {"value":"2","name":"子管理员"},
+						    {"value":"3","name":"管理员"}
+					 ];
+    
+        var logf = new Ext.FormPanel({
+            renderTo: "log",
+            title: "用户登录",
+            width: 300,
+            //method:'GET',
+            height: 150,
+            frame: true,
+            floating: true,
+            defaultType: "textfield",
+            labelAlign: "right",
+            url:'${path}/dologin.do',
+            items: [
+            {
+                fieldLabel: "用户名",
+                name:'identityCard'
+                
+            },
+            {
+                inputType: "password",
+                fieldLabel: "密码",
+                name:'password'
+            },
+            {
+                    xtype: 'combobox',
+                    fieldLabel: '用户类型',
+                    name: 'state',
+                    store: Ext.create('Ext.data.Store', {
+                        fields: ['value','name'],
+                        data : states
+                    }),
+                    valueField: 'value',
+                    displayField: 'name',
+                    typeAhead: true,
+                    emptyText: '请选择'
+            }],
+            buttons: [
+	            { text: "登录", 
+	              handler: function() {
+				                var form = this.up('form').getForm();
+				                form.submit({
+				                    success: function(form, action) {
+				                    	location.href='${path}/home.do';
+				                    },
+				                    failure: function(form, action) {
+				                    	var msg = Ext.decode(action.response.responseText);
+				                        Ext.Msg.alert('提示', msg.msg);
+				                    }
+				                });
+				        }
+	              }
+            ]
+ 
+
+        });
+        //end
+        var vp = new Ext.Viewport();
+        var x = (vp.getSize().width - logf.getSize().width) / 2;
+        var y = (vp.getSize().height) / 2- logf.getSize().height;
+        logf.setPosition(x, y);
+    })
+</script>
 <body>
-	<h1>登录页面</h1>
-    <div class="login">
-        <form id="loginform" action="${path }/dologin.do" method="post">
-            <p><label for="identityCard">用户名：</label><input type="text" id="identityCard" name="identityCard" maxlength="20"/></p>
-            <p><label for="password">密　码：</label><input type="password" id="password" name="password" maxlength="20"/></p>
-            <p><input type="submit" value="登录" /><span id="errorMsg" style="color: red;"></span></p>
-        </form>
-    </div>
+<div id="log"></div>
 </body>
 </html>

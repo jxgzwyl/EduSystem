@@ -4,7 +4,7 @@ public class GlobalConfigure {
 
 	public static final String SPRING_APPLICATION_CONTEXT_KEY = GlobalConfigure.class.getName() + "_SPRING_APPLICATION_CONTEXT_KEY";
 	
-	public static final String[] NO_INTERCEPTOR_URL = {"/login.do","/dologin.do","/test/**"};
+	public static final String[] NO_INTERCEPTOR_URL = {"/login.do","/dologin.do","/getMenu.do","/test/**"};
 	
 	public static final String IMAGE_REGEX_TYPE = "image/[\\w|-]+";
 	
