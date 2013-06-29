@@ -109,8 +109,8 @@ public class PrivilegeController {
 		aa.setCls("file");
 		aa.setId("31");
 		aa.setLeaf(true);
-		aa.setText("行政单位人员管理");
-		aa.setUrl("projectList.jsp");
+		aa.setText("行政单位管理");
+		aa.setUrl("/organization/organizationList.do");
 		
 		TreeNode ab=new TreeNode();
 		ab.setCls("file");
@@ -154,6 +154,13 @@ public class PrivilegeController {
 		ag.setText("角色管理");
 		ag.setUrl("studentNotice.jsp");
 		
+		TreeNode ai=new TreeNode();
+		ai.setCls("file");
+		ai.setId("39");
+		ai.setLeaf(true);
+		ai.setText("用户管理");
+		ai.setUrl("/user/userList.do");
+		
 		TreeNode ah=new TreeNode();
 		ah.setCls("file");
 		ah.setId("38");
@@ -169,6 +176,7 @@ public class PrivilegeController {
 		achildren.add(af);
 		achildren.add(ag);
 		achildren.add(ah);
+		achildren.add(ai);
 		adminMenu.setChildren(achildren);
 		
 		menu.add(treeNode);

@@ -15,7 +15,7 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven> 
 	    <mvc:message-converters register-defaults="true"> 
-	        <bean class="com.zikool.edu.common.UTF8StringHttpMessageConverter"/> 
+	        <bean class="com.zikool.edu.frame.common.UTF8StringHttpMessageConverter"/> 
 	    </mvc:message-converters> 
     </mvc:annotation-driven> 
 

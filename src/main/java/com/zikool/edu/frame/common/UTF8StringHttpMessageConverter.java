@@ -1,4 +1,4 @@
-package com.zikool.edu.common;
+package com.zikool.edu.frame.common;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
